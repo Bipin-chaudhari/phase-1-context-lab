@@ -1,10 +1,56 @@
 /* Your Code Here */
+/* Your Code Here */
+
+function createEmployeeRecord(array) {
+    return {
+        firstName: array[0],
+        familyName: array[1],
+        title: array[2],
+        payPerHour: array[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    };
+}
+
+function createEmployeeRecords(arrays) {
+    return arrays.map(createEmployeeRecord);
+}
+
+function createTimeInEvent(dateTime) {
+    const [date, hour] = dateTime.split(" ");
+    this.timeInEvents.push({
+        type: "TimeIn",
+        date,
+        hour: parseInt(hour, 10)
+    });
+    return this;
+}
+
+function createTimeOutEvent(dateTime) {
+    const [date, hour] = dateTime.split(" ");
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        date,
+        hour: parseInt(hour, 10)
+    });
+    return this;
+}
+
+function hoursWorkedOnDate(date) {
+    const timeIn = this.timeInEvents.find(e => e.date === date);
+    const timeOut = this.timeOutEvents.find(e => e.date === date);
+    return (timeOut.hour - timeIn.hour) / 100;
+}
+
+function wagesEarnedOnDate(date) {
+    return hoursWorkedOnDate.call(this, date) * this.payPerHour;
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but
  sneaky bug that we'll cover in the next few lessons!
-
+ 
  As a result, the lessons for this function will pass *and* it will be available
  for you to use if you need it!
  */
@@ -20,4 +66,35 @@ const allWagesFor = function () {
 
     return payable
 }
+
+function findEmployeeByFirstName(srcArray, firstName) {
+    return srcArray.find(e => e.firstName === firstName);
+}
+
+function calculatePayroll(employees) {
+    return employees.reduce((total, e) => total + allWagesFor.call(e), 0);
+}
+
+// module.exports = {
+//     createEmployeeRecord,
+//     createEmployeeRecords,
+//     createTimeInEvent,
+//     createTimeOutEvent,
+//     hoursWorkedOnDate,
+//     wagesEarnedOnDate,
+//     allWagesFor,
+//     findEmployeeByFirstName,
+//     calculatePayroll
+// };
+
+/*
+ We're giving you this function. Take a look at it, you might see some usage
+ that's new and different. That's because we're avoiding a well-known, but
+ sneaky bug that we'll cover in the next few lessons!
+
+ As a result, the lessons for this function will pass *and* it will be available
+ for you to use if you need it!
+ */
+
+
 
